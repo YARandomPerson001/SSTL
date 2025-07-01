@@ -1,25 +1,38 @@
 
-unsigned long long TextToValue( char * Text, unsigned int Length )
+#include <stdlib.h>
+
+#define ulong unsigned long long
+
+char * ValueToString( ulong Value )
 {
-    register long long Value = 0;
+    register ulong Length = 0;
+    register ulong Dummy = Value;
 
-    for ( volatile unsigned int i = 0; i < Length; i++ )
+    // Get the digit length.
+    for( register ulong i = Value; i != 0; Length++ )
+        i /= 10;
+
+    // Convert the number into a string.
+    char * String = ( char * ) calloc( Length, sizeof( char * ) );
+
+    for( register ulong i = Length; i > 0; i-- )
     {
-        if ( i > 0 ) Value *= 10;
-
-        switch ( Text[ i ] )
+        switch ( Dummy % 10 )
         {
-            case '1': Value += 1; break;
-            case '2': Value += 2; break;
-            case '3': Value += 3; break;
-            case '4': Value += 4; break;
-            case '5': Value += 5; break;
-            case '6': Value += 6; break;
-            case '7': Value += 7; break;
-            case '8': Value += 8; break;
-            case '9': Value += 9; break;
+            case 0: String[i - 1] = '0'; break;
+            case 1: String[i - 1] = '1'; break;
+            case 2: String[i - 1] = '2'; break;
+            case 3: String[i - 1] = '3'; break;
+            case 4: String[i - 1] = '4'; break;
+            case 5: String[i - 1] = '5'; break;
+            case 6: String[i - 1] = '6'; break;
+            case 7: String[i - 1] = '7'; break;
+            case 8: String[i - 1] = '8'; break;
+            case 9: String[i - 1] = '9'; break;
         }
+
+        Dummy /= 10;
     }
 
-    return Value;
+    return String;
 }
