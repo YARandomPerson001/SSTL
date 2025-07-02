@@ -15,4 +15,6 @@ ulong SSTL_Position( ulong X, ulong Y );
 ulong SSTL_ForegroundColor( bool Intensity, enum SSTL_TextColor Color );
 ulong SSTL_BackgroundColor( bool Intensity, enum SSTL_TextColor Color );
 
+ulong SSTL_TextStyle( enum SSTL_TextStyle Style );
+
 #endif

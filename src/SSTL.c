@@ -3,7 +3,25 @@
 
 #include "./SSTL.h"
 
+extern char * ValueToString( ulong Value );
+
 ulong SSTL_Clear( ) { return ( ulong ) printf("\033[2J"); }
+
+ulong SSTL_Position( ulong X, ulong Y ) { return printf( "\033[%s;%sH", ( char * ) ValueToString( X ), ( char * ) ValueToString( Y ) ); }
+
+ulong SSTL_TextStyle( enum SSTL_TextStyle Style )
+{
+    switch ( Style )
+    {
+        case Reset:     return printf("\033[0m"); break;
+        case Bold:      return printf("\033[1m"); break;
+        case Faint:     return printf("\033[2m"); break;
+        case Italic:    return printf("\033[3m"); break;
+        case Underline: return printf("\033[4m"); break;
+    }
+
+    return 0;
+}
 
 ulong SSTL_ForegroundColor( bool Intensity, enum SSTL_TextColor Color)
 {
